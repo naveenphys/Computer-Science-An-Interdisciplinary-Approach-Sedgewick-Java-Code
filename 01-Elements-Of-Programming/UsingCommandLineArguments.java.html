@@ -1,0 +1,25 @@
+<!-- Generator: GNU source-highlight 3.1.9
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">/* Program: UsingCommandLineArguments</font></i>
+<i><font color="#9A1900"> *</font></i>
+<i><font color="#9A1900"> * Description: Accept the command line arguments after program name and </font></i>
+<i><font color="#9A1900"> *              prints them back to the terminal</font></i>
+<i><font color="#9A1900"> * Example:</font></i>
+<i><font color="#9A1900"> *         java UsingCommandLineArguments hello</font></i>
+<i><font color="#9A1900"> *         Here, "hello" is the command line argument stored in args[0], and </font></i>
+<i><font color="#9A1900"> *         is printed to the stdout</font></i>
+<i><font color="#9A1900">*/</font></i>
+
+<b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> <font color="#008080">UsingCommandLineArguments</font> <font color="#FF0000">{</font>
+    <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">main</font></b><font color="#990000">(</font>String<font color="#990000">[]</font> args<font color="#990000">)</font> <font color="#FF0000">{</font>
+        <i><font color="#9A1900">// Print number of arguments.</font></i>
+        System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font><font color="#FF0000">"Number of arguments: "</font> <font color="#990000">+</font> args<font color="#990000">.</font>length<font color="#990000">);</font>
+        <i><font color="#9A1900">// Loop over the arguments.</font></i>
+        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">String</font> arg <font color="#990000">:</font> args<font color="#990000">)</font> <font color="#FF0000">{</font>
+            System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font>arg<font color="#990000">);</font>
+        <font color="#FF0000">}</font>
+    <font color="#FF0000">}</font>
+<font color="#FF0000">}</font>
+</tt></pre>
