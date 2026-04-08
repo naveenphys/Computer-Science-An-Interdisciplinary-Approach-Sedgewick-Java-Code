@@ -18,25 +18,28 @@
  */
 public class squareRoot {
     public static void main(String[] args) {
-        final int MAXITER = 10;
+        final int MAXITER = 100;
+
+        System.out.println("Max double: " + Double.MAX_VALUE);
         // Default value of x
-        double x = 2.0;
+        double x = 1.0;
         if (args.length == 1) {
             x = Double.parseDouble(args[0]);
         }
         System.out.println("Finding square root of " + x);
 
-
         System.out.println("iter\ty_est\ty_sol\tabs(y_est-y_sol)");
         // Initial guess.
-        double yGuess1 = x / 2.0;
+        double yGuess1 = Math.pow(10.0, Math.log10(x)/2.0);
+        // double yGuess1 = x / 2.0;
         int count = 0;
         while (count <= MAXITER) {
             count += 1;
             double yGuess2 = yGuess1 - (yGuess1 * yGuess1 - x) / (2 * yGuess1);
             double error = Math.abs(yGuess2 - Math.sqrt(x));
-            System.out.println(count + "\t" +
+            System.out.println(count + "\t" + yGuess1 + "\t" +
                     yGuess2 + "\t" + Math.sqrt(x) + "\tΔ =" + error);
+            if (error < 1e-12) break;
             yGuess1 = yGuess2;
         }
     }
