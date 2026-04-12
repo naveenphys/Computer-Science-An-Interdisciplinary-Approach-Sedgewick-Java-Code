@@ -59,6 +59,9 @@ int main(int argc, char *argv[]) {
             x0, sol1, sol2, fabs(sol1 - sol2));
     printf("sqrt       elapsed time: %ld clocks\n", (long)(tend1 - tbeg1));
     printf("sqrt_newton elapsed time: %ld clocks\n", (long)(tend2 - tbeg2));
+
+    printf("sqrt       elapsed time: %f sec\n", ((double)(tend1 - tbeg1))/CLOCKS_PER_SEC);
+    printf("sqrt_newton elapsed time: %f sec\n", ((double)(tend2 - tbeg2))/CLOCKS_PER_SEC);
     
     return 0;
 }
