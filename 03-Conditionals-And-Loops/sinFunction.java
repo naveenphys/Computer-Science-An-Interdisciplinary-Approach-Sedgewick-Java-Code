@@ -18,7 +18,7 @@ public class sinFunction {
             w = new double[nSamples];
             x[0] = Double.parseDouble(args[0]);
         } else {
-            nSamples = 2 * 4 + 1;
+            nSamples = 2 * 4 * 8 + 1;
             x = new double[nSamples];
             y = new double[nSamples];
             z = new double[nSamples];
@@ -26,7 +26,7 @@ public class sinFunction {
             double dx = (xmax - xmin) / (nSamples - 1);
             for (int i = 0; i < nSamples; i++) {
                 x[i] = i * dx - xmax;
-                x[i] *= 5.0*Math.PI;
+                x[i] *= 4.0*Math.PI;
             }
         }
 
