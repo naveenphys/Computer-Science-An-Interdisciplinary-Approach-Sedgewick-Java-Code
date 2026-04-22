@@ -84,7 +84,7 @@ public class matrixOps {
         int[] s2 = shape(b);
         int[][] c = new int[s1[0]][s2[1]];
 
-        // Arrays must have the same number of rows.
+        // Number of cols in a must be equal to the number of rows in b.
         if (canBeMultiplied(a, b)) {
             for (int i = 0; i < c.length; i++) {
                 for (int j = 0; j < c[i].length; j++) {
