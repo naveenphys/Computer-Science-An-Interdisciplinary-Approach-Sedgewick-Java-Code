@@ -21,13 +21,11 @@ public class rumorSpreading {
             nTrials = Integer.parseInt(args[1]);
 
         int[] freq = new int[N];
-
-        int res = spreadRumor(N);
-
+        int res;
         int cntr = 1;
         while (cntr < nTrials) {
             cntr++;
-            res = spread(N);
+            res = spreadRumor(N);
             freq[res-1]++;
         }
 
