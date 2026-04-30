@@ -26,7 +26,7 @@ int main() {
     int sampleSize = 100;
     int min = 1;
     int max = 200;
-    int sum = 6000;
+    int sum = 8000;
 
     int** samples;
     
@@ -70,8 +70,8 @@ int** generateSamples(int nSamples, int sampleSize, int min, int max, int sum) {
         for (int i = 0; i < sampleSize; i++) {
             samples[count][i] = sample[i];
         }
-        // printf("%d\n", count);
-        // printVector(sample, 10, sampleSize);
+        //printf("%d\n", count);
+        //printVector(sample, 10, sampleSize);
         free(sample);
         count++;
     }
