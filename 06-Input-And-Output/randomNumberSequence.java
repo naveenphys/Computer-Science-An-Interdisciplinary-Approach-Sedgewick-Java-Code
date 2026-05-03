@@ -4,6 +4,12 @@ import java.util.Random;
 /* Program: randomNumberSequence.
  * Description: Generate a sequence of random number demostrating input using
  *              command line and output using standard output.
+ * 
+ * Format in Java:
+ * https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html
+ * 
+ * Note: In case of formatted output, the argument and specifier must match.
+ * Otherwise, the IllegalFormatConversionException will be thrown.
  */
 public class randomNumberSequence {
     // class Random
@@ -26,10 +32,20 @@ public class randomNumberSequence {
 
         // Seed the random number generator.
         rnd.setSeed(Long.MAX_VALUE);
-        // Generate the numbers.
+        
+        // Array to store the numbers.
+        double [] randf = new double[N];
+
+        // Generate and print the numbers.
         for (int i = 0; i < N; i++) {
-            System.out.printf("%3d %21.15e\n", i, randomDoubleBracketed(min, max));
+            randf[i] = randomDoubleBracketed(min, max);
         }
+
+        // Print using the StdOut class.
+        for (int i = 0; i < N; i++) {
+            System.out.printf("%3d %21.15e\n", i, randf[i]);
+        }
+
     }
 
     /* Generates one random number at a time.
@@ -37,5 +53,6 @@ public class randomNumberSequence {
     public static double randomDoubleBracketed(double min, double max) {
         return rnd.nextDouble(min, max);
     }
+
 
 }
