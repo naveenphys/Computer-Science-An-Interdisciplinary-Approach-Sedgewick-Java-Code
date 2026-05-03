@@ -7,6 +7,7 @@
  * https://en.wikipedia.org/wiki/Hermite_polynomials
  *              
  * Gnuplot 
+ * Use "test" command in gnuplot to see all linestyles.
  * plot for [j = 1:6] 'hermitePoly.dat' u 1:j w l title sprintf("H_%d",j-1)
  * plot for [j = 1:6] 'hermitePoly.dat' u 1:j w l dt j lc 'black' title sprintf("H_%d",j-1)
  */
