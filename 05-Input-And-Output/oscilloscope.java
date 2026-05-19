@@ -6,7 +6,7 @@
  *              simultaneously. Assume that the inputs are sinusoidal, so that 
  *              the following parametric equations describe the curve
  *
- * Run: java --class-path ./stdlib_dir oscilloscope.java 1 1 0 1 3 1.5707963267948966              
+ * Run: java --class-path ./stdlib_dir oscilloscope.java 1 1 5 3 30 45              
  */
 public class oscilloscope {
     public static void main(String[] args) {
@@ -14,21 +14,21 @@ public class oscilloscope {
             System.out.println("""
                     Enter the following quantities (in this order):
                     aX: Double
-                    freqX(cps): Double
-                    phaseX (Degrees): Double
                     aY: Double
+                    freqX(cps): Double
                     freqY(cps): Double
+                    phaseX (Degrees): Double
                     phaseY (Degrees): Double""");
         }
-        final double twoPI = 2.0* Math.PI;
+        final double twoPI = 2.0 * Math.PI;
         final double tol = 1e-8;
         double aX = Double.parseDouble(args[0]);
-        double nuX = Double.parseDouble(args[1]);
-        double omegaX = twoPI* nuX;
-        double phaseX = Math.toRadians(Double.parseDouble(args[2]));
-        double aY = Double.parseDouble(args[3]);
-        double nuY = Double.parseDouble(args[4]);
-        double omegaY = twoPI * nuY;
+        double aY = Double.parseDouble(args[1]);
+        double omegaX = Double.parseDouble(args[2]);
+        double nuX = omegaX / twoPI;
+        double omegaY = Double.parseDouble(args[3]);
+        double nuY = omegaY / twoPI;
+        double phaseX = Math.toRadians(Double.parseDouble(args[4]));
         double phaseY = Math.toRadians(Double.parseDouble(args[5]));
 
         // Plotting setup.
@@ -47,14 +47,14 @@ public class oscilloscope {
         System.out.printf("Freq of the y-oscillator  = %f Hz\n", nuY);
 
         // Time period. (omega * T = 2*Pi)
-        double Tx = 1.0/nuX;
-        double Ty = 1.0/nuY;
+        double Tx = 1.0 / nuX;
+        double Ty = 1.0 / nuY;
         double tMin = Math.min(Tx, Ty);
 
         System.out.printf("Time period of x-oscillator (Tx) = %f\n", Tx);
         System.out.printf("Time period of y-oscillator (Ty) = %f\n", Ty);
 
-        // Find out the number of full cycles needed such that both 
+        // Find out the number of full cycles needed such that both
         // oscillators reach their initial phase space position.
         int nCycles = 0;
         double x0, y0, u0, v0;
@@ -66,9 +66,9 @@ public class oscilloscope {
         u0 = aX * Math.cos(phaseX) * omegaX;
         v0 = aY * Math.cos(phaseY) * omegaY;
         boolean c1, c2, c3, c4, c0;
-        
+
         System.out.printf("%4d %+f %+f %+f %+f\n", nCycles, x0, y0, u0, v0);
-        
+
         do {
             nCycles += 1;
             // Position and velocity after one cycle of the faster oscillator.
@@ -76,10 +76,10 @@ public class oscilloscope {
             yt = aY * Math.sin(nCycles * omegaY * tMin + phaseY);
             ut = aX * Math.cos(nCycles * omegaX * tMin + phaseX) * omegaX;
             vt = aY * Math.cos(nCycles * omegaY * tMin + phaseY) * omegaY;
-            c1 = Math.abs(xt-x0) > tol;
-            c2 = Math.abs(yt-y0) > tol;
-            c3 = Math.abs(ut-u0) > tol;
-            c4 = Math.abs(vt-v0) > tol;
+            c1 = Math.abs(xt - x0) > tol;
+            c2 = Math.abs(yt - y0) > tol;
+            c3 = Math.abs(ut - u0) > tol;
+            c4 = Math.abs(vt - v0) > tol;
             c0 = c1 || c2 || c3 || c4;
             System.out.printf("%4d %+f %+f %+f %+f\n", nCycles, xt, yt, ut, vt);
         } while (c0);
@@ -91,7 +91,7 @@ public class oscilloscope {
 
         StdDraw.enableDoubleBuffering();
         // Evolve until the phase covered by the both the oscillators matches.
-        while (omegaX * t + phaseX < nCycles * 2.0 * Math.PI) {
+        while (omegaX * t + phaseX < nCycles * twoPI) {
             double x = aX * Math.sin(omegaX * t + phaseX);
             double y = aY * Math.sin(omegaY * t + phaseY);
             StdDraw.point(x, y);
