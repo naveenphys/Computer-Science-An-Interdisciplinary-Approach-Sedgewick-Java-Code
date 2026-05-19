@@ -14,22 +14,22 @@ public class oscilloscope {
             System.out.println("""
                     Enter the following quantities (in this order):
                     aX: Double
-                    omegaX/2*PI: Double
-                    phaseX: Double
+                    freqX(cps): Double
+                    phaseX (Degrees): Double
                     aY: Double
-                    omegaY/2*PI: Double
-                    phaseY: Double""");
+                    freqY(cps): Double
+                    phaseY (Degrees): Double""");
         }
         final double twoPI = 2.0* Math.PI;
         final double tol = 1e-8;
         double aX = Double.parseDouble(args[0]);
         double nuX = Double.parseDouble(args[1]);
         double omegaX = twoPI* nuX;
-        double phaseX = Double.parseDouble(args[2]);
+        double phaseX = Math.toRadians(Double.parseDouble(args[2]));
         double aY = Double.parseDouble(args[3]);
         double nuY = Double.parseDouble(args[4]);
         double omegaY = twoPI * nuY;
-        double phaseY = Double.parseDouble(args[5]);
+        double phaseY = Math.toRadians(Double.parseDouble(args[5]));
 
         // Plotting setup.
         // Set the canvas properties.
