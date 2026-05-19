@@ -51,9 +51,8 @@ public class oscilloscope {
         double Ty = 1.0/nuY;
         double tMin = Math.min(Tx, Ty);
 
-        System.out.printf("Tx = %f\n", Tx);
-        System.out.printf("Ty = %f\n", Ty);
-        System.out.printf("tMin = %f\n", tMin);
+        System.out.printf("Time period of x-oscillator (Tx) = %f\n", Tx);
+        System.out.printf("Time period of y-oscillator (Ty) = %f\n", Ty);
 
         // Find out the number of full cycles needed such that both 
         // oscillators reach their initial phase space position.
