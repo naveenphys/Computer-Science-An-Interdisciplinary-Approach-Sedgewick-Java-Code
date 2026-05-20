@@ -21,7 +21,7 @@ public class oscilloscope {
                     phaseY (Degrees): Double""");
         }
         final double twoPI = 2.0 * Math.PI;
-        final double tol = 1e-8;
+        final double tol = 1e-12;
         double aX = Double.parseDouble(args[0]);
         double aY = Double.parseDouble(args[1]);
         double omegaX = Double.parseDouble(args[2]);
@@ -33,9 +33,10 @@ public class oscilloscope {
 
         // Plotting setup.
         // Set the canvas properties.
-        StdDraw.setPenRadius(0.005);
-        StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.setCanvasSize(1200, 1200);
+        StdDraw.enableDoubleBuffering();
+        StdDraw.setPenRadius(0.01);
+        StdDraw.setPenColor(StdDraw.BLUE);
+        StdDraw.setCanvasSize(800, 800);
         StdDraw.setXscale(-1.2 * aX, 1.2 * aX);
         StdDraw.setYscale(-1.2 * aY, 1.2 * aY);
 
@@ -49,6 +50,7 @@ public class oscilloscope {
         // Time period. (omega * T = 2*Pi)
         double Tx = 1.0 / nuX;
         double Ty = 1.0 / nuY;
+        // Shorter of the time period.
         double tMin = Math.min(Tx, Ty);
 
         System.out.printf("Time period of x-oscillator (Tx) = %f\n", Tx);
@@ -67,8 +69,6 @@ public class oscilloscope {
         v0 = aY * Math.cos(phaseY) * omegaY;
         boolean c1, c2, c3, c4, c0;
 
-        System.out.printf("%4d %+f %+f %+f %+f\n", nCycles, x0, y0, u0, v0);
-
         do {
             nCycles += 1;
             // Position and velocity after one cycle of the faster oscillator.
@@ -76,12 +76,19 @@ public class oscilloscope {
             yt = aY * Math.sin(nCycles * omegaY * tMin + phaseY);
             ut = aX * Math.cos(nCycles * omegaX * tMin + phaseX) * omegaX;
             vt = aY * Math.cos(nCycles * omegaY * tMin + phaseY) * omegaY;
-            c1 = Math.abs(xt - x0) > tol;
-            c2 = Math.abs(yt - y0) > tol;
-            c3 = Math.abs(ut - u0) > tol;
-            c4 = Math.abs(vt - v0) > tol;
-            c0 = c1 || c2 || c3 || c4;
+            c1 = Math.abs(xt - x0) >= tol;
+            c2 = Math.abs(yt - y0) >= tol;
+            c3 = Math.abs(ut - u0) >= tol;
+            c4 = Math.abs(vt - v0) >= tol;
+            System.out.printf("%4d %+f %+f %+f %+f\n", 0, x0, y0, u0, v0);
             System.out.printf("%4d %+f %+f %+f %+f\n", nCycles, xt, yt, ut, vt);
+            System.out.printf("==== %+f %+f %+f %+f\n",
+                    Math.abs(xt - x0),
+                    Math.abs(yt - y0),
+                    Math.abs(ut - u0),
+                    Math.abs(vt - v0));
+            c0 = (c1 || c2 || c3 || c4);
+
         } while (c0);
 
         // Time step.
@@ -89,11 +96,11 @@ public class oscilloscope {
 
         double t = 0.0;
 
-        StdDraw.enableDoubleBuffering();
         // Evolve until the phase covered by the both the oscillators matches.
-        while (omegaX * t + phaseX < nCycles * twoPI) {
+        while (omegaX * t < nCycles * twoPI) {
             double x = aX * Math.sin(omegaX * t + phaseX);
             double y = aY * Math.sin(omegaY * t + phaseY);
+            StdDraw.setPenColor(StdDraw.BLUE);
             StdDraw.point(x, y);
             t += dt;
         }
