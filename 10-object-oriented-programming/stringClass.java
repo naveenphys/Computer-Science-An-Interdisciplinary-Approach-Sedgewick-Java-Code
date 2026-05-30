@@ -22,6 +22,5 @@ public class stringClass {
         // https://docs.oracle.com/javase/8/docs/api/java/lang/String.html.
         System.out.println("Check https://docs.oracle.com/javase/8/"
                 + "docs/api/java/lang/String.html");
-
     }
 }

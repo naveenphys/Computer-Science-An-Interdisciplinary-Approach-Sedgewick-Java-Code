@@ -19,6 +19,12 @@
 // Error: Main method not found in class MyProgram, please define the main 
 //        method as:
 //    public static void main(String[] args)
+// 
+// Since Java 21, it is ok to write a program without the presence of a class,
+// interface, or enum
+// 
+// Unnamed Classes and Instance Main Methods
+// https://openjdk.org/jeps/445
 
 public class MyProgram
 {
